@@ -62,4 +62,5 @@ __all__ = [
     "BatchHardSoftMarginTripletLoss",
     "BatchSemiHardTripletLoss",
     "BatchAllTripletLoss",
+    "SigmoidLoss"
 ]
