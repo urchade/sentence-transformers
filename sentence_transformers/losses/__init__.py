@@ -18,6 +18,7 @@ from .ContrastiveTensionLoss import (
     ContrastiveTensionLossInBatchNegatives,
 )
 from .CosineSimilarityLoss import CosineSimilarityLoss
+from .SigmoidLoss import SigmoidLoss
 from .DenoisingAutoEncoderLoss import DenoisingAutoEncoderLoss
 from .GISTEmbedLoss import GISTEmbedLoss
 from .MarginMSELoss import MarginMSELoss
