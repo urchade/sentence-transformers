@@ -9,7 +9,7 @@ from sentence_transformers.SentenceTransformer import SentenceTransformer
 from sentence_transformers.util import fullname
 
 
-class DotSigmoidLoss(nn.Module):
+class SigmoidLoss(nn.Module):
     def __init__(
         self,
         model: SentenceTransformer,
