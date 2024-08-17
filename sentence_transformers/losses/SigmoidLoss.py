@@ -14,7 +14,7 @@ class SigmoidLoss(nn.Module):
         self,
         model: SentenceTransformer,
         loss_fct: nn.Module = nn.BCELoss(),
-        cos_score_transformation: nn.Module = nn.Identity(),
+        cos_score_transformation: nn.Module = nn.Sigmoid(),
     ) -> None:
         super().__init__()
         self.model = model
@@ -23,8 +23,8 @@ class SigmoidLoss(nn.Module):
 
     def forward(self, sentence_features: Iterable[Dict[str, torch.Tensor]], labels: torch.Tensor) -> torch.Tensor:
         embeddings = [self.model(sentence_feature)["sentence_embedding"] for sentence_feature in sentence_features]
-        dot_product = torch.dot(embeddings[0], embeddings[1])
-        output = self.cos_score_transformation(torch.sigmoid(dot_product))
+        dot_product = torch.sum(embeddings[0] * embeddings[1], dim=1)
+        output = self.cos_score_transformation(dot_product)
         return self.loss_fct(output, labels.float().view(-1))
 
     def get_config_dict(self) -> dict[str, Any]:
